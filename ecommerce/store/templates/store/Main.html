@@ -72,11 +72,12 @@
 
         let cart = JSON.parse(getCookie('cart'));
 
-        if (cart === undefined) {
+        if (cart == undefined) {
             cart = {}
             console.log('cart Created', cart)
             document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
         }
+        console.log('cart:', cart)
     </script>
 </head>
 <body>
