@@ -64,16 +64,21 @@
 				</div>
 				{% endfor %}
 				<h5>Items:   {{order.get_cart_items}}</h5>
-				<h5>Total:   ${{order.get_cart_total|floatformat:2}}</h5>
+				<h5>Total:   £{{order.get_cart_total|floatformat:2}}</h5>
 			</div>
 		</div>
 	</div>
 
-	<script src="https://www.paypal.com/sdk/js?client-id=AaZ82A-tV2Thfr818rxdZuPeJrzNSXOQ87rWXJxkpt-aSUV23YZ8PCf00AGXppTR-xsXiSz0zy7Qjn3M&currency=USD"></script>
+	<script src="https://www.paypal.com/sdk/js?client-id=AaZ82A-tV2Thfr818rxdZuPeJrzNSXOQ87rWXJxkpt-aSUV23YZ8PCf00AGXppTR-xsXiSz0zy7Qjn3M&currency=GBP"></script>
 
 	<script>
+        let total = '{{order.get_cart_total}}'
         // Render the PayPal button into #paypal-button-container
         paypal.Buttons({
+            style: {
+                color: 'blue',
+                shape: 'pill',
+            },
 
 
             // Set up the transaction
@@ -81,7 +86,7 @@
                 return actions.order.create({
                     purchase_units: [{
                         amount: {
-                            value: '0.01'
+                            value:parseFloat(total).toFixed(2)
                         }
                     }]
                 });
@@ -99,8 +104,8 @@
     </script>
 
 	<script type="text/javascript">
-		var shipping = '{{order.shipping}}'
-		var total = '{{order.get_cart_total}}'
+		let shipping = '{{order.shipping}}'
+
 
 		if (shipping == 'False'){
 		 	document.getElementById('shipping-info').innerHTML = ''
@@ -117,7 +122,7 @@
 			    document.getElementById('payment-info').classList.remove("hidden");
 		}
 
-		var form = document.getElementById('form')
+		let form = document.getElementById('form')
 		form.addEventListener('submit', function(e){
 	    	e.preventDefault()
 	    	console.log('Form Submitted...')

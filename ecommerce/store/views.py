@@ -14,8 +14,9 @@ def store(request):
     items = data['items']
 
     products = Product.objects.all()
-    context = {'products': products, 'cartItems': cartItems}
+    context = {'products': products, 'cartItems': cartItems}  # Include cartItems in the context
     return render(request, 'store/store.html', context)
+
 
 
 def cart(request):
@@ -93,3 +94,9 @@ def processOrder(request):
         print('User is not logged in')
 
     return JsonResponse('Payment submitted..', safe=False)
+
+
+def login(request):
+    print("Login")
+    context = {}
+    return render(request, 'store/login.html', context)
