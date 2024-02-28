@@ -29,7 +29,7 @@
             return cookieValue;
         }
 
-        let csrftoken = getToken('csrftoken')
+        let csrftoken = '{{ csrf_token }}'
 
 
         function updateUserOrder(productId, action) {
