@@ -1,6 +1,7 @@
+from store.models import Order
 import json
-from .models import *
 from django.http import HttpResponse
+from store.models import *
 
 
 def cookieCart(request):

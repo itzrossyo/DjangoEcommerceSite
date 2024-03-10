@@ -1,13 +1,14 @@
+from store.models import Order
 import json
-from .models import *
 from django.http import HttpResponse
-
+from store.models import Product
 
 def cookieCart(request):
     # Create empty cart for now for non-logged in user
     try:
         cart = json.loads(request.COOKIES['cart'])
-    except:
+    except Exception as e:
+        print('this is an error in cookie cart', e)
         cart = {}
         print('CART:', cart)
 

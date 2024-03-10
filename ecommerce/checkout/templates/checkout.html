@@ -17,21 +17,30 @@
 					<div id="shipping-info">
 						<hr>
 						<p>Shipping Information:</p>
+						{% if userObj %}
+						<!-- <button type="button" class="btn btn-warning">Saved Address</button> -->
+						<label for="saved_address">Saved Address</label>
+						<select name="saved_address" id="saved_address">
+							{% for i in customer_all_add %}
+							<option value="{{i.id}}">{{i.address}},{{i.city}},{{i.zipcode}}</option>
+							{% endfor %}
+						</select>
+						{% endif %}
 						<hr>
 						<div class="form-field">
-							<input class="form-control" type="text" name="address" placeholder="Address..">
+							<input class="form-control" type="text" id="address" name="address" placeholder="Address.." value="{{customer_add.address}}">
 						</div>
 						<div class="form-field">
-							<input class="form-control" type="text" name="city" placeholder="City..">
+							<input class="form-control" type="text" id="city" name="city" placeholder="City.." value="{{customer_add.city}}">
 						</div>
 						<div class="form-field">
-							<input class="form-control" type="text" name="state" placeholder="State..">
+							<input class="form-control" type="text" id="state"  name="state" placeholder="State.." value="{{customer_add.state}}">
 						</div>
 						<div class="form-field">
-							<input class="form-control" type="text" name="zipcode" placeholder="Zip code..">
+							<input class="form-control" type="text" id="zipcode" name="zipcode" placeholder="Zip code.."value="{{customer_add.zipcode}}" >
 						</div>
 						<div class="form-field">
-							<input class="form-control" type="text" name="country" placeholder="Zip code..">
+							<input class="form-control" type="text" id="country" name="country" placeholder="Zip code.." value="{{customer_add.zipcode}}">
 						</div>
 					</div>
 
@@ -51,7 +60,7 @@
 
 		<div class="col-lg-6">
 			<div class="box-element">
-				<a  class="btn btn-outline-dark" href="{% url 'cart' %}">&#x2190; Back to Cart</a>
+				<a  class="btn btn-outline-dark" href="{% url 'cart:cart' %}">&#x2190; Back to Cart</a>
 				<hr>
 				<h3>Order Summary</h3>
 				<hr>
@@ -68,7 +77,7 @@
 			</div>
 		</div>
 	</div>
-
+	
 	<script src="https://www.paypal.com/sdk/js?client-id=AaZ82A-tV2Thfr818rxdZuPeJrzNSXOQ87rWXJxkpt-aSUV23YZ8PCf00AGXppTR-xsXiSz0zy7Qjn3M&currency=GBP"></script>
 
 	<script>
@@ -79,6 +88,8 @@
                 color: 'blue',
                 shape: 'pill',
             },
+
+
             // Set up the transaction
             createOrder: function(data, actions) {
                 return actions.order.create({
@@ -89,6 +100,7 @@
                     }]
                 });
             },
+
             // Finalize the transaction
             onApprove: function(data, actions) {
                 return actions.order.capture().then(function(details) {
@@ -99,7 +111,7 @@
 
         }).render('#paypal-button-container');
     </script>
-
+	
 	<script type="text/javascript">
 		let shipping = '{{order.shipping}}'
 
@@ -160,8 +172,8 @@
 	    		userFormData.email = form.email.value
 	    	}
 
-	    	console.log('Shipping Info:', shippingInfo)
-	    	console.log('User Info:', userFormData)
+	    	// console.log('Shipping Info:', shippingInfo)
+	    	// console.log('User Info:', userFormData)
 
 	    	let url = "/process_order/"
 	    	fetch(url, {
@@ -175,16 +187,43 @@
 	    	})
 	    	.then((response) => response.json())
 	    	.then((data) => {
-				console.log('Success:', data);
-				alert('Transaction completed');
-
+				// console.log('Success:', data);
+				// alert('Transaction completed');
 				cart = {}
 				document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
-
-				window.location.href = "{% url 'store' %}"
+				toastr.success('Payment successful !');
+				// window.location.href = "{% url 'store' %}"
+				setTimeout(function() {
+					window.location.href = "{% url 'store' %}";
+				}, 3000);
 
 				})
 	    }
+	</script>
+	
+	<script>
+		//This code block is for call ajax and automatically add html to  address
+	
+		$(document).ready(function(){
+			$("#saved_address").change(function () {
+				obj_id = $(this).val()
+				$.ajax({
+						url: '{% url "checkout:getAddress_ajax" %}',
+						data: {
+							'id': obj_id
+					},
+					success: function (data) {
+						$('#address').val(data.address)
+						$('#city').val(data.city)
+						$('#state').val(data.state)
+						$('#zipcode').val(data.zipcode)
+						$('#country').val(data.zipcode)
+						
+					}
+				});
+		});
+	
+		})
 	</script>
 {% endblock content %}
 

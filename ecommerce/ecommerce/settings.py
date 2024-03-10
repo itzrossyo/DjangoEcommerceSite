@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-(zatl%azt0z8w^y&j4epm0v8fdmiiyjrkpvmmti!!xsu))or8@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'store.apps.StoreConfig',  # new app
+    'User',
+    'checkout',
+    'cart',
 ]
 
 MIDDLEWARE = [
@@ -64,6 +67,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'ecommerce.context_processors.login_check_func',
+                # ecommerce\ecommerce\context_processors
             ],
         },
     },
@@ -122,6 +127,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = 'User:login'
+LOGOUT_REDIRECT_URL = 'User:login'
 
 # Media Folder Settings
 MEDIA_URL = '/images/'
