@@ -1,4 +1,4 @@
-# Flask Blog
+# Ecom Birmingham EGG
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/itzrossyo/chatBlog?logo=github&style=flat-square)
 ![GitHub contributors](https://img.shields.io/github/contributors/itzrossyo/chatBlog?logo=github&style=flat-square)
@@ -33,42 +33,32 @@
 
 ## User Experience (UX)
 
-Flask Blog is a website aimed at providing users with engaging and insightful blog content. The site strives to create
-an informative and user-friendly experience for visitors interested in exploring various topics through blog posts.
+Ecom Birmingham EGG is a website aimed at providing users with the use case of allowing them to order products online now .
 
 ### Key Information
 
-- Name: Flask Blog
-- Website: [https://ecom.devross.co.uk](https://blog.devross.co.uk/)
-- Purpose: To offer a diverse range of blog content for readers.
+- Name: Ecom Birmingham EGG
+- Website: [https://ecom.devross.co.uk](https://ecom.devross.co.uk/)
+- Purpose: To offer a user to see products and able to buy them online.
 - Target Audience: Individuals interested in exploring and reading blog posts on various subjects.
 
 ### User Goals
 
-The main goals of users visiting Flask Blog are:
+The main goals of users visiting ecom.devross.co.uk are as follows:
 
-- To discover interesting and well-written blog posts on different topics.
-- To easily navigate through the website and find content that matches their interests.
-- To engage with the content through comments and feedback.
-- To share their favorite blog posts with others.
+- To browse through a wide variety of products conveniently.
+- To place orders for their desired products easily.
+- To register and login to their account for a personalized shopping experience.
+- To save their shipping address for faster checkout in future purchases.
 
 ### First Time Visitor Goals
 
 - Understand the purpose of the website.
-- Navigate through different blog categories to discover diverse content.
-- Find out how to get involved or leave comments on blog posts.
 
 ### Returning Visitor Goals
 
-- Check for new blog posts, updates, or featured content.
-- Revisit specific categories for more blog posts on preferred topics.
-- Interact with the blog community through comments and discussions.
-
-### Frequent Visitor Goals
-
-- Contribute to the blog community by submitting guest posts or ideas.
-- Share blog posts on social media platforms.
-- Participate in polls or surveys related to blog content preferences.
+- To be able to see the products and order them.
+- Register and login to save address.
 
 ## Design
 
@@ -141,7 +131,7 @@ To fork the Flask Blog repository:
 
 ### How to Clone
 
-To clone the Flask Blog repository:
+To clone the Ecom repository:
 
 1. Log in (or sign up) to GitHub.
 2. Go to the repository for this project, [blog-flask](https://github.com/itzrossyo/DjangoEcommerceSite).
@@ -216,7 +206,41 @@ I would love to expand on this by incorporating additional features such as:
 The blog content will continue to cover a wide range of topics, ensuring diversity and relevance to various reader
 interests.
 
-## Prerequisites
+## Installation Instructions
+
+To set up this project locally, follow the steps below:
+
+1. Clone the repository to your local machine.
+2. Navigate to the project directory.
+3. Create a virtual environment:
+    ```bash
+    python -m venv env
+    ```
+4. Activate the virtual environment:
+    - On Windows:
+        ```bash
+        .\env\Scripts\activate
+        ```
+    - On Unix or MacOS:
+        ```bash
+        source env/bin/activate
+        ```
+5. Install the required dependencies:
+    ```bash
+    pip install -r requirements.txt
+    ```
+6. Apply migrations:
+    ```bash
+    python manage.py migrate
+    ```
+7. Run the server:
+    ```bash
+    python manage.py runserver
+    ```
+Now, you should be able to access the application at `localhost:8000` in your web browser.
+
+Please note that you need to have Python installed on your machine to follow these instructions.
+
 
 #### Homelab
 
