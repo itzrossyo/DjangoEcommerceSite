@@ -45,17 +45,15 @@ def processOrder(request):
         order.save()
 
         if order.shipping == True:
-            ShippingAddress.objects.create(
-                customer=customer,
-                # order=order,
-                address=data['shipping']['address'],
-                city=data['shipping']['city'],
-                state=data['shipping']['state'],
-                zipcode=data['shipping']['zipcode'],
-            )
+           shipping_address, created = ShippingAddress.objects.get_or_create(
+            customer=customer,
+            address=data['shipping']['address'],
+            city=data['shipping']['city'],
+            state=data['shipping']['state'],
+            zipcode=data['shipping']['zipcode'],
+        )
     else:
         guestOrder(request, data)
-        print('User is not logged in')
     return JsonResponse('Payment submitted..', safe=False)
 
 
